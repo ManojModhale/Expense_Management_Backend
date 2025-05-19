@@ -1,5 +1,7 @@
 package com.expensemanagement.backend.model;
 
-public class Role {
-
+public enum Role {
+	EMPLOYEE,
+    MANAGER,
+    ADMIN
 }
