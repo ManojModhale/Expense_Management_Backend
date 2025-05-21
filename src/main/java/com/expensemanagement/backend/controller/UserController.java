@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.expensemanagement.backend.model.Contact;
 import com.expensemanagement.backend.model.Role;
 import com.expensemanagement.backend.model.User;
 import com.expensemanagement.backend.service.UserService;
@@ -162,5 +163,25 @@ public class UserController {
     	} catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+	}
+	
+	@PostMapping("/contact-us")
+	public ResponseEntity<Map<String, Object>> contactus(@RequestBody Map<String, Object> request){
+		try {
+			String name= (String) request.get("name");
+			String email= (String) request.get("email");
+			String mobile= (String) request.get("mobile");
+			String message= (String) request.get("message");
+			System.out.println(name+"-"+email+"-"+mobile+"-"+message);
+			Contact contact= userService.contactUs(name, email, mobile, message);
+			Map<String, Object> response = new HashMap<>();
+			response.put("message", "Contact Message Stored successfully");
+			response.put("contact", contact);
+			return ResponseEntity.status(HttpStatus.CREATED).body(response);
+		} catch (IllegalArgumentException e) {
+			Map<String, Object> errorResponse = new HashMap<>();
+			errorResponse.put("message", e.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+		}
 	}
 }

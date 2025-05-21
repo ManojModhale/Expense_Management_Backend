@@ -68,7 +68,8 @@ public class ManagerService {
     	String username = (user !=null ? user.getUsername() : null);
     	
     	return new ExpenseDto(
-    			expense.getId(), 
+    			expense.getId(),
+    			expense.getName(),
     			expense.getDescription(), 
     			expense.getCategory(), 
     			expense.getAmount(), 

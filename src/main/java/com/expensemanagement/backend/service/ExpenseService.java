@@ -66,6 +66,7 @@ public class ExpenseService {
     	if (expense == null) {
             throw new IllegalArgumentException("Expense not found for this employee: " + updatedExpense.getId());
         }
+    	expense.setName(updatedExpense.getName());
     	expense.setDescription(updatedExpense.getDescription());
     	expense.setAmount(updatedExpense.getAmount());
     	expense.setCategory(updatedExpense.getCategory());
@@ -73,5 +74,16 @@ public class ExpenseService {
     	expense.setStatus(Status.PENDING);
     	
     	return expenseRepository.save(expense);
+    }
+    
+    public boolean updateExpenseName(Long id, String name) {
+    	Optional<Expense> expenseOptional=expenseRepository.findById(id);
+    	if(expenseOptional.isEmpty()) {
+    		return false;
+    	}
+    	Expense expense=expenseOptional.get();
+    	expense.setName(name);
+    	expenseRepository.save(expense);
+    	return true;
     }
 }

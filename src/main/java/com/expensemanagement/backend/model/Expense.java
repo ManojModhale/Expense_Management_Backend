@@ -27,6 +27,9 @@ public class Expense {
 	private Long id;
 	
 	@Column(nullable = false)
+	private String name;
+	
+	@Column(nullable = false)
 	private String description;
 	
 	@Enumerated(EnumType.STRING)
@@ -55,10 +58,11 @@ public class Expense {
 		this.date=LocalDate.now();
 	}
 
-	public Expense(Long id, String description, Category category, BigDecimal amount, LocalDate date, Status status,
+	public Expense(Long id,String name, String description, Category category, BigDecimal amount, LocalDate date, Status status,
 			User user) {
 		super();
 		this.id = id;
+		this.name = name;
 		this.description = description;
 		this.category = category;
 		this.amount = amount;
@@ -75,12 +79,29 @@ public class Expense {
 		this.date = date;
 	}
 
+	public Expense(String name, String description, Category category, BigDecimal amount, LocalDate date) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.category = category;
+		this.amount = amount;
+		this.date = date;
+	}
+
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {
@@ -133,7 +154,7 @@ public class Expense {
 
 	@Override
 	public String toString() {
-	    return "Expense [id=" + id + ", description=" + description + ", category=" + category + ", amount=" + amount
+	    return "Expense [id=" + id + ", name=" + name + ", description=" + description + ", category=" + category + ", amount=" + amount
 	            + ", date=" + date + ", status=" + status + ", userId=" + (user != null ? user.getId() : null) + "]";
 	}
 	

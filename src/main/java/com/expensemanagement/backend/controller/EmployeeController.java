@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.expensemanagement.backend.model.Expense;
 import com.expensemanagement.backend.service.EmployeeService;
+import com.expensemanagement.backend.service.ExpenseService;
 
 @RestController
 @RequestMapping("/api/employee")
@@ -27,6 +29,9 @@ public class EmployeeController {
 	
 	@Autowired
 	private EmployeeService employeeService;
+	
+	@Autowired
+	private ExpenseService expenseService;
 	
 	@GetMapping("/expensesByUsername/{username}")
     public ResponseEntity<List<Expense>> getExpensesByEmployee(@PathVariable String username) {
@@ -67,5 +72,10 @@ public class EmployeeController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // Handle other errors
         }
+    }
+    
+    @PutMapping("/update-expense-name")
+    public boolean updateExpenseName(@RequestParam Long id, @RequestParam String name) {
+    	return expenseService.updateExpenseName(id, name);
     }
 }

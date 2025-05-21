@@ -10,6 +10,8 @@ public class ExpenseDto {
 	
 	private Long id;
 	
+	private String name;
+	
 	private String description;
 	
 	private Category category;
@@ -35,11 +37,12 @@ public class ExpenseDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ExpenseDto(Long id, String description, Category category, BigDecimal amount, LocalDate date, Status status,
+	public ExpenseDto(Long id, String name, String description, Category category, BigDecimal amount, LocalDate date, Status status,
 		 String rejectionReason, String receiptUrl, String requesterFirstName, String requesterLastName,
 			String requesterUsername) {
 		super();
 		this.id = id;
+		this.name=name;
 		this.description = description;
 		this.category = category;
 		this.amount = amount;
@@ -58,6 +61,14 @@ public class ExpenseDto {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {

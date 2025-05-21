@@ -7,8 +7,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.expensemanagement.backend.model.Contact;
 import com.expensemanagement.backend.model.Role;
 import com.expensemanagement.backend.model.User;
+import com.expensemanagement.backend.repository.ContactRepository;
 import com.expensemanagement.backend.repository.UserRepository;
 
 @Service
@@ -22,6 +24,9 @@ public class UserService {
 	
 	@Autowired
 	private EmailService emailService;
+	
+	@Autowired
+	private ContactRepository contactRepository;
 	
 	 // Registration
     @Transactional
@@ -132,5 +137,8 @@ public class UserService {
     	return userRepository.save(user);
     }
 
-
+    public Contact contactUs(String name, String email, String mobile, String message) {
+    	Contact contact=new Contact(name, email, mobile, message);
+    	return contactRepository.save(contact);
+    }
 }

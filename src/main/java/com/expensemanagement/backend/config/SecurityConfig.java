@@ -36,11 +36,13 @@ public class SecurityConfig {
                 .requestMatchers("/api/users/remove-user").permitAll()
                 .requestMatchers("/api/users/get-user-profile/{username}").permitAll()
                 .requestMatchers("/api/users/update-user/{username}").permitAll()
+                .requestMatchers("/api/users/contact-us").permitAll()
                 
                 .requestMatchers("/api/employee/expensesByUsername/{username}").permitAll()
                 .requestMatchers("/api/employee/addexpense/{username}").permitAll()
                 .requestMatchers("/api/employee/delete-expense/{username}/{id}").permitAll()
                 .requestMatchers("/api/employee/update-expense/{username}").permitAll()
+                .requestMatchers("/api/employee/update-expense-name").permitAll()
                 
                 .requestMatchers("/api/manager/expensesByUsername/{username}").permitAll()
                 .requestMatchers("/api/manager/addexpense/{username}").permitAll()
